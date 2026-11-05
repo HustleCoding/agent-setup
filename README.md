@@ -42,5 +42,3 @@ These live in each tool's account or UI, so set them by hand once:
 - Claude Code plugins: only `impeccable`. No pstack, vercel, typescript-lsp, context7, linear or playwright plugins.
 - claude.ai connectors in Claude Code: roam, Figma and Gmail off.
 - Codex plugins: canva, gmail, figma, build-web-apps, stripe, vercel, google-calendar off.
-
-Why this shape: the research behind it is at https://claude.ai/artifact/GBr8ACfQ7UFbPjpVYcZGYd.
