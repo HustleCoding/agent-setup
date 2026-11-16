@@ -1,6 +1,6 @@
 # agent-setup
 
-My personal setup for AI coding agents: how they talk to me, plus three small skills. One source, installed into every harness on the machine.
+My personal setup for AI coding agents: how they talk to me, plus reusable skills. One source, installed into every harness on the machine.
 
 ## Install on a new laptop
 
@@ -18,8 +18,9 @@ Re-run `install.sh` after `git pull`. It is safe to run again. Restart open agen
 | `rules/style.md` | How replies should read: answer first, 1-3 lines, everyday words, details on request, errors never shortened |
 | `rules/subagents.md` | Short report format for subagents, which never see an output style |
 | `hooks/style-reminder.sh` | Re-anchors the style on every prompt; one JSON shape works in all three harnesses |
-| `skills/` | `grill-me`, `grilling`, `handoff` from [mattpocock/skills](https://github.com/mattpocock/skills), MIT |
+| `skills/` | `agent-guardrails`; `grill-me`, `grilling`, `handoff` from [mattpocock/skills](https://github.com/mattpocock/skills), MIT |
 | `install.sh` | Detects each harness and writes the files below |
+| `tests/` | Isolated installer checks for existing settings, hooks, skills and repeat installs |
 
 ## What install.sh writes
 
@@ -30,6 +31,14 @@ Re-run `install.sh` after `git pull`. It is safe to run again. Restart open agen
 | DeepSeek Harness | managed block in `~/.dsh/AGENTS.md`, the hook in `hooks.json` loaded through `cordis.patch.yml`, skill symlinks in `~/.dsh/skills` |
 
 Managed blocks sit between `agent-setup:begin` and `agent-setup:end` markers, so anything else in those files survives. A real skill folder that would be replaced is moved to `~/.agent-setup-backup/` first.
+
+For Codex, put feature settings in a `[features]` table; the installer stops without rewriting the config if `features` uses inline or dotted keys.
+
+## Verify changes
+
+Run `python3 -m unittest discover -s tests -v`. Tests use a temporary home and do not touch your installed setup. GitHub Actions runs them on macOS and Linux.
+
+`agent-guardrails` applies ideas from Lauren Tan's [All Code Is Slop (Except Mine)](https://www.youtube.com/watch?v=O_zcc6Xl12g): make recurring corrections executable and verify behavior on the real surface.
 
 ## Any other harness
 
